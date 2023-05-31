@@ -1,0 +1,35 @@
+.mission_cont {
+    margin-top: 35rem;
+    margin-left: 80px;
+    margin-right: 80px;
+    border-radius: 50px;
+    padding: 40px 50px 50px 40px;
+
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.mission_cont p {
+    padding-top: 20px;
+}
+
+@media screen and (max-width: 1050px) {
+    .mission_cont {
+        margin-top: 20rem;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .mission_cont {
+        margin-top: 18rem;
+        padding: 30px;
+        margin-left: 20px;
+        margin-right: 20px;
+
+    }
+
+    .mission_cont p {
+        text-align: left;
+        padding-top: 5px;
+        font-size: 11px;
+    }
+}

@@ -1,0 +1,71 @@
+.Tips_container {
+    text-align: center;
+    padding-top: 120px;
+}
+
+.card_cont {
+    display: flex;
+    margin: 50px;
+    justify-content: space-between;
+
+}
+
+.card_1,
+.card_2,
+.card_3 {
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    background: #fff;
+    border-radius: 30px;
+    padding: 40px 50px 50px 40px;
+    min-height: 250px;
+    max-width: 400px;
+    margin: 0px 50px 40px;
+
+}
+
+.card_1 li,
+.card_2 li,
+.card_3 li {
+    padding-top: 30px;
+    font-size: 14px;
+}
+
+.card_1 h4,
+.card_2 h4,
+.card_3 h4 {
+    font-size: 20px;
+    padding-top: 10px;
+}
+
+@media screen and (max-width: 550px) {
+    .card_cont {
+        flex-direction: column;
+        margin: 5px;
+    }
+
+    .card_1,
+    .card_2,
+    .card_3 {
+
+        padding: 30px 40px 40px 30px;
+        min-height: 200px;
+        max-width: 400px;
+        margin: 0px 50px 40px;
+
+    }
+
+    .Tips_container {
+        padding-top: 80px;
+    }
+
+    .card_1 li,
+    .card_2 li,
+    .card_3 li {
+        padding-top: 10px;
+        font-size: 14px;
+    }
+
+
+
+
+}
