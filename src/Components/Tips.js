@@ -3,6 +3,8 @@ import './Tips.css'
 
 const Tips = () => {
   return (
+    
+   
     <div className='Tips_container'>
       <h2>Tips</h2>
       <div className='card_cont'>
@@ -37,6 +39,8 @@ const Tips = () => {
       </div>
 
     </div>
+    
+   
   )
 }
 

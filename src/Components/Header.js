@@ -1,31 +1,39 @@
 import React from "react"
 import bloodlogo from "../Images/Logo.png"
 import Button from '@mui/material/Button'
-
 import {RiCloseLine , RiMenu3Line} from 'react-icons/ri'
+import { Link } from "react-router-dom"
+
+
 // const styles = {
 //    color: #FFFFF 
 // }
 const Menu = () => (
    <>
-   <p><a href="#">Home</a></p>
-   <p><a href="#">Find Blood</a></p>
+   <Link to="/"><p>Home</p></Link>
+   <Link to="/"> <p>Find Blood</p></Link>
          
    </>
 )
+
 export default function Header(props) {
    const [toggleMenu,setToggleMenu] = React.useState(false);
     return(
+      <div className={`header ${props.showBackground ? "with-background" : ""}`}>
+   
       <div className="bar">
+      <Link to="/">
          <img className="blood-img" src={bloodlogo}></img>
+         </Link>
          <div className="all_cont">
          <div className="links-cont">
+
         <Menu />
          </div>
          <div className="button">
          
-         <p><a href="">Register Now</a></p>
-         <Button  sx={{color:'#000000' ,
+         <Link to="/registernow"><p>Register Now</p></Link>
+         <Button component={Link} to="/login" sx={{color:'#000000' ,
                         minHeight:'50px',
                         minWidth:'120px',
                          border: "2px black solid",
@@ -44,12 +52,13 @@ export default function Header(props) {
                   <div className="header-menu_container_links"> 
                      <Menu / >
                      <div className="header-menu_button">
-                        <p><a href="#">Register Now</a></p>
-                     <Button  sx={{color:'#000000' ,
+                     <Link to="/registernow"><p>Register Now</p></Link>
+                        <Button  component={Link} to="/login" sx={{color:'#000000' ,
                         border: "2px black solid",
                         ":hover": {color:"black",
                                     border:"2px black solid"}
                            }} variant="outlined">Log in</Button>
+                           
                       </div>
 
                   </div>
@@ -57,6 +66,7 @@ export default function Header(props) {
                </div>
 
             )}
+            
          </div>
 
             
@@ -64,5 +74,8 @@ export default function Header(props) {
        
 
       </div>
+      </div>
+      
+   
    )
 }

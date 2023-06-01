@@ -7,11 +7,18 @@
 body {
   margin: 0;
   font-family: Poppins;
-  background-image: url(Images/Hero-Gradient.png);
+  /* background-image: url(Images/Hero-Gradient.png);
   background-attachment: scroll;
-  background-repeat: no-repeat;
+  background-repeat: no-repeat; */
 
 }
+
+.with-background {
+  background-image: url('./Images/Hero-Gradient.png');
+  background-attachment: scroll;
+  background-repeat: no-repeat;
+}
+
 
 
 
@@ -23,6 +30,11 @@ body {
 }
 
 a {
+  text-decoration: none;
+  color: #000000;
+}
+
+.all_cont p {
   color: #000000;
 
   text-decoration: none;
@@ -33,7 +45,7 @@ a {
   position: relative;
 }
 
-a:after {
+.all_cont p:after {
   background: none repeat scroll 0 0 transparent;
   bottom: 0;
   content: "";
@@ -46,7 +58,7 @@ a:after {
   width: 0;
 }
 
-a:hover:after {
+.all_cont p:hover:after {
   width: 100%;
   left: 0;
 }
@@ -57,6 +69,7 @@ a:hover:after {
 .all_cont {
   display: flex;
   align-items: center;
+
 }
 
 .links-cont {
@@ -149,6 +162,10 @@ a:hover:after {
 
 
 @media screen and (max-width: 550px) {
+  .with-background {
+    background-image: none;
+  }
+
   body {
     /* background-image: none; */
     background: rgb(2, 0, 36);

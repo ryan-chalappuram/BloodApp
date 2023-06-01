@@ -2,8 +2,12 @@
 import React from 'react'
 import './Body.css'
 import { Button } from '@mui/material'
-const Body = () => {
+import { Link } from "react-router-dom"
+
+const Body = (props) => {
+ props.setShowBackground(true);
   return (
+    
    
       <div className='body_content'>
       <h1>Save Life Donate Blood </h1>
@@ -13,7 +17,7 @@ const Body = () => {
           </p>
          </div>
          <div className='button_container'>
-         <Button   sx={{color:'#ffffff' ,
+         <Button  component={Link} to="/registernow" sx={{color:'#ffffff' ,
                         backgroundColor: "#000000",
                         border: "2px black solid",
                         "&:hover": {bordercolor: '2px black solid'
@@ -22,6 +26,7 @@ const Body = () => {
          </div>
     </div>
     
+   
   )
 }
 
