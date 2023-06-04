@@ -2,6 +2,7 @@ import React from 'react'
 import TextField from '@mui/material/TextField';
 import { Button } from '@mui/material'
 import './Signup.css'
+import { Link } from 'react-router-dom';
 const Signup = (props) => {
     props.setShowBackground(false);
     
@@ -13,6 +14,8 @@ const Signup = (props) => {
       <br></br>
       <TextField id="outlined-basic" label="Password" variant="outlined" />
       </div>
+      <Link to="/login">
+      <p>Already a user? Login</p></Link>
       <div className='sign_button_cont'>
       <Button   sx={{color:'#ffffff' ,
                         backgroundColor: "#000000",

@@ -4,8 +4,8 @@ import './Body.css'
 import { Button } from '@mui/material'
 import { Link } from "react-router-dom"
 
-const Body = (props) => {
- props.setShowBackground(true);
+const Body = () => {
+//  props.setShowBackground(true);
   return (
     
    
