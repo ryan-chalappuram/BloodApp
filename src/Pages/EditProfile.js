@@ -157,10 +157,6 @@ const RegisterForm = (props) => {
 
   const district1 = [
     {
-      value: "",
-      label: "Ernakulam",
-    },
-    {
       value: "Ernakulam",
       label: "Ernakulam",
     },
@@ -179,10 +175,10 @@ const RegisterForm = (props) => {
   ];
 
   return (
-    
-    <Container maxWidth="sm" className="reg_cont">
+    <div className="login_cont">
+    <Container maxWidth="sm">
       <Typography variant="h4" align="center" gutterBottom className="header2">
-        Register As Donor
+        Edit Profile
       </Typography>
       <form onSubmit={handleSubmit}>
         <Grid container spacing={2}>
@@ -355,7 +351,7 @@ const RegisterForm = (props) => {
         </Box>
       </form>
     </Container>
-   
+    </div>
   );
 };
 

@@ -6,6 +6,7 @@ import Home from "./Pages/Home";
 import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
 import Register from "./Pages/Register"
+import EditProfile from "./Pages/EditProfile"
 function App() {
   const location = useLocation();
   const [showBackground, setShowBackground] = useState(true);
@@ -26,6 +27,7 @@ function App() {
             
           <Route path="/registernow" element={<Signup setShowBackground={setShowBackground}/> } />
          
+          <Route path="/edit" element={<EditProfile setShowBackground={setShowBackground}/>} />
           <Route path="/register" element={<Register setShowBackground={setShowBackground}/>} />
         </Routes>
          

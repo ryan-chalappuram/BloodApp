@@ -11,17 +11,17 @@ color: #FFFFFF;
   background: linear-gradient(90.1deg, #46052D -1.59%, #46052D -1.58%, #500732 14.15%, #5E0933 31.58%, #610834 46.9%, #6A0B37 62.75%, #991747 76.48%, #B32346 93.91%);
 }
 
-.login_cont {
+.reg_cont {
     font-family: Poppins;
     display: flex;
     padding: 100px;
     border-radius: 50px;
     /* width: 50%; */
-    margin: auto;
+    /* margin: auto;
     text-align: center;
     flex-direction: column;
     align-items: center;
-    max-width: 35%;
+    max-width: 35%; */
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
