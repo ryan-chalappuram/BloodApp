@@ -6,8 +6,8 @@ import { BrowserRouter } from "react-router-dom";
 // import Login from "./Components/Pages/Login";
 
 ReactDOM.render(
-  <BrowserRouter>
+  <React.StrictMode>
     <App />
-  </BrowserRouter>,
+  </React.StrictMode>,
   document.getElementById("root")
 );

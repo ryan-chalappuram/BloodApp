@@ -9,6 +9,7 @@
   }
   
   .profile-info {
+    padding-left: 15px;
     display: flex;
     justify-content: space-between;
     
@@ -17,7 +18,7 @@
   
   .profile-details {
     display: flex;
-    gap: 25px;
+    gap: 40px;
   }
   
   .profile-image {
