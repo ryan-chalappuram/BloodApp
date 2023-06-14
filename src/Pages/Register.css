@@ -1,30 +1,80 @@
 .header2{
-    font-family: Poppins;
-font-style: normal;
-font-weight: 500;
-font-size: 36px;
-line-height: 57px;
-border-radius: 50px;
+   
+/* width:550px;  */
+/* margin-top:15px; */
+margin-left: -21.5px;
 
+/* border-radius: 15px; */
+
+width:534px;
+/* margin-right:40%; */
+/* width: auto;  */
+padding:1000px;
+
+
+height:94px;
+transform-origin: right; /* Set the transform origin to the left side */
+/* transform: scaleX(1.5);  */
+/* position: relative; */
+/* justifyContent: center; */
 color: #FFFFFF;
 /* height:124px; */
+padding-top:15px;
+padding-bottom:450px;
+
+max-width:100%;
+
+
   background: linear-gradient(90.1deg, #46052D -1.59%, #46052D -1.58%, #500732 14.15%, #5E0933 31.58%, #610834 46.9%, #6A0B37 62.75%, #991747 76.48%, #B32346 93.91%);
 }
 
-.reg_cont {
+.header_cont{
+    /* font-family: Poppins;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 36px;
+    line-height: 42.19px;
+    margin: 0 auto; 
+    width: 960px;  */
+    position: relative; /* Set the container position to relative */
+    display: flex; /* Enable flexbox layout */
+    justify-content: flex-start; /* Align content to the left */
+    align-items: flex-end; /* Align content to the bottom */
     font-family: Poppins;
-    display: flex;
-    padding: 100px;
-    border-radius: 50px;
-    /* width: 50%; */
-    /* margin: auto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 36px;
+    line-height: 25px;
+    margin: 0 auto; 
+    width: 1260px;
+    /* transform: translateX(+50%); */
+    /* right: 50%; */
+}
+
+.reg_cont {
+
+  /* font-family: Poppins;
+  padding-bottom: 35px;
+  border-radius: 50px;
+  margin: auto;
     text-align: center;
     flex-direction: column;
-    align-items: center;
-    max-width: 35%; */
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    align-items: center; */
+    /* max-width: 105%; */
+  /* width: 50%; */
+  /* margin-left: 0; */
+  /* text-align: left; */
+  
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 117px 29px 0px;
 }
 
 .Grid .item{
     font-family: Poppins;
 }
+
+@media screen and (max-width: 768px) {
+    .header2 {
+      width: 100%;
+      max-width: 500px;
+    }
+  }

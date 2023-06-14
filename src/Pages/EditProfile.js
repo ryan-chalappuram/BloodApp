@@ -175,11 +175,13 @@ const RegisterForm = (props) => {
   ];
 
   return (
-    <div className="login_cont">
-    <Container maxWidth="sm">
-      <Typography variant="h4" align="center" gutterBottom className="header2">
+    <>
+    <Container maxWidth="sm" className="reg_cont">
+    <div  className="header2"  style={{ padding: '0 27px 0 37px', justifyContent: 'center', display: 'flex' }} >
+      <Typography variant="h4" align="center" gutterBottom className="header_cont">
         Edit Profile
       </Typography>
+      </div>
       <form onSubmit={handleSubmit}>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
@@ -351,7 +353,8 @@ const RegisterForm = (props) => {
         </Box>
       </form>
     </Container>
-    </div>
+    </>
+    
   );
 };
 
