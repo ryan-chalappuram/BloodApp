@@ -1,0 +1,33 @@
+.findblood-form-cont {
+    max-width: 50%;
+    padding: 70px;
+    text-align: center;
+    align-items: center;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border-radius: 50px;
+    margin: auto;
+    justify-content: center;
+}
+
+.findblood-form {
+    max-width: 50%;
+    margin: auto;
+    align-items: center;
+
+}
+
+.findblood-form-cont h1 {
+    padding-bottom: 50px;
+}
+
+@media screen and (max-width: 550px) {
+    .findblood-form-cont {
+        margin-top: 70px;
+        max-width: fit-content;
+    }
+
+    .findblood-form {
+        margin: auto;
+        max-width: 100%;
+    }
+}
