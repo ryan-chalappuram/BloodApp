@@ -19,7 +19,12 @@ body {
   background-repeat: no-repeat;
 }
 
+.all_cont img {
+  max-width: 50px;
 
+
+  cursor: pointer;
+}
 
 
 
@@ -94,6 +99,7 @@ a {
   align-items: center;
 
 }
+
 
 
 

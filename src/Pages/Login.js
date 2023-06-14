@@ -4,7 +4,8 @@ import Button from '@mui/material/Button';
 import axios from 'axios';
 import './Login.css'
 
-const LoginForm = () => {
+const LoginForm = (props) => {
+  props.setShowBackground(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [notverif, setNotVerif] = useState(false);

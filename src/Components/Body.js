@@ -6,6 +6,7 @@ import { Link } from "react-router-dom"
 
 const Body = () => {
 //  props.setShowBackground(true);
+const accessToken = localStorage.getItem("accessToken");
   return (
     
    
@@ -17,12 +18,12 @@ const Body = () => {
           </p>
          </div>
          <div className='button_container'>
-         <Button  component={Link} to="/registernow" sx={{color:'#ffffff' ,
+        {!accessToken &&  <Button  component={Link} to="/registernow" sx={{color:'#ffffff' ,
                         backgroundColor: "#000000",
                         border: "2px black solid",
                         "&:hover": {bordercolor: '2px black solid'
                                     , backgroundColor: "#000000"}
-                           }} variant="contained">Register Now</Button>
+                           }} variant="contained">Register Now</Button>}
          </div>
     </div>
     

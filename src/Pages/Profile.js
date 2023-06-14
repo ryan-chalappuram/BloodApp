@@ -7,8 +7,35 @@ const Profile = (props) => {
 
   useEffect(() => {
     fetchProfileData();
+    getTelegramData();
     props.setShowBackground(false);
   }, []);
+  const getTelegramData = async () => {
+    try {
+      const accessToken = localStorage.getItem("accessToken");
+  
+      const response = await axios.get(
+        "https://04e3-2405-201-f001-a1c4-34a3-586d-241b-1f81.ngrok-free.app/telebot/userdata/",
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          }
+        
+        }
+      );
+  
+      if (response.status === 200) {
+        const data = response.data;
+        console.log(data);
+        // Process the retrieved data here
+      } else {
+        console.error("Failed to fetch Telegram data");
+      }
+    } catch (error) {
+      console.error("Error while fetching Telegram data:", error);
+    }
+  };
+  
 
   const fetchProfileData = async () => {
     try {
