@@ -1,51 +1,56 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import "./Profile.css";
 
 const Profile = (props) => {
-    props.setShowBackground(false);
+  const [profileData, setProfileData] = useState(null);
 
-  const profileData = {
-    "Full Name": "John Doe",
-    Email: "noufub@gmail.com",
-    District: "Tvm",
-    "Phone Number": "9999",
-    Pincode: "679303",
-    Age: "14",
-    "Blood Group": "O+ve",
-    Address: "Kundannoor",
-    "Last Donation Date": "miniyaann",
+  useEffect(() => {
+    fetchProfileData();
+    props.setShowBackground(false);
+  }, []);
+
+  const fetchProfileData = async () => {
+    try {
+      const accessToken = localStorage.getItem("accessToken");
+      
+
+      const response = await axios.get(
+        "https://04e3-2405-201-f001-a1c4-34a3-586d-241b-1f81.ngrok-free.app/users/getprofiledata/",
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        const data = response.data;
+        setProfileData(data);
+      } else {
+        console.error("Failed to fetch profile data");
+      }
+    } catch (error) {
+      console.error("Error while fetching profile data:", error);
+    }
   };
 
-  const entries = Object.entries(profileData);
-  const maxLength = Math.max(...entries.map(([key]) => key.length));
+  const renderProfileDetails = () => {
+    if (profileData) {
+      const entries = Object.entries(profileData);
+      const maxLength = Math.max(...entries.map(([key]) => key.length));
 
-
-  // const [profile, setProfile] = useState(null);
-  // const [isLoading, setIsLoading] = useState(true);
-
-  // useEffect(() => {
-  //   // Simulating an API call to fetch the profile data
-  //   const fetchProfile = async () => {
-  //     try {
-  //       const response = await fetch(`https://api.example.com/profiles/${userId}`);
-  //       const data = await response.json();
-  //       setProfile(data);
-  //       setIsLoading(false);
-  //     } catch (error) {
-  //       console.error("Error fetching profile:", error);
-  //     }
-  //   };
-
-  //   fetchProfile();
-  // }, [userId]);
-
-  // if (isLoading) {
-  //   return <div>Loading...</div>;
-  // }
-
-  // if (!profile) {
-  //   return <div>Profile not found.</div>;
-  // }
+      return entries.map(([key, value], index) => (
+        <div className="flex" key={key}>
+          <div className="key" style={{ width: `${maxLength}ch` }}>
+            {key}
+          </div>
+          <div className="value">{value}</div>
+        </div>
+      ));
+    }
+    return null;
+  };
 
   return (
     <div className="overall">
@@ -71,21 +76,7 @@ const Profile = (props) => {
       <div className="card1">
         <h5 className="card-title">About</h5>
 
-        <>
-      {entries.map(([key, value],index) => (
-        <>
-      <div className="flex" key={key}>
-        <div className="key" style={{ width: `${maxLength}ch` }}>
-          {key}
-        </div>
-        <div className="value">{value}</div>
-      </div>
-      {index !== entries.length - 1 && (
-          <hr className="test" />
-        )}
-        </>
-        ))}
-      </>
+        {renderProfileDetails()}
 
         <div className="container"></div>
       </div>
@@ -94,4 +85,3 @@ const Profile = (props) => {
 };
 
 export default Profile;
-

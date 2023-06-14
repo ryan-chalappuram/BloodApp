@@ -30,7 +30,7 @@ const RegisterForm = (props) => {
   const currentDate = dayjs();
 
   const formatDate = (date) => {
-    const [year, month, day] = date.split('-');
+    const [year, month, day] = date.split("-");
     return `${day}-${month}-${year}`;
   };
 
@@ -40,28 +40,31 @@ const RegisterForm = (props) => {
     if (Object.keys(errors).length === 0) {
       try {
         const formData = {
-          first_name:firstName,
-          last_name:lastName,
-          phone_number:phoneNumber,
-          address:address,
-          district:district,
-          pincode:pincode,
-          dateofbirth:formatDate(age),
-          blood_group:bloodGroup,
-          state:state,
-          lastDonatedDate:formatDate(lastDonatedDate),
+          first_name: firstName,
+          last_name: lastName,
+          phone_number: phoneNumber,
+          address: address,
+          district: district,
+          pincode: pincode,
+          dateofbirth: formatDate(age),
+          blood_group: bloodGroup,
+          state: state,
+          lastDonatedDate: formatDate(lastDonatedDate),
         };
 
-         console.log(formData); 
+        const accessToken = localStorage.getItem("accessToken");
+
+        const headers = {
+          Authorization: `Bearer ${accessToken}`,
+        };
 
         const response = await axios.post(
-          "https://04e3-2405-201-f001-a1c4-34a3-586d-241b-1f81.ngrok-free.app/users/profileupdate/", // Replace with your backend API endpoint
-          formData
+          "https://04e3-2405-201-f001-a1c4-34a3-586d-241b-1f81.ngrok-free.app/users/profileupdate/",
+          formData,
+          { headers }
         );
 
         console.log(response.data); // Handle successful response from the backend
-
-        // Set the status code
         console.log(response.status);
 
         // Clear form fields and show success message
@@ -81,7 +84,6 @@ const RegisterForm = (props) => {
 
         // Set the status code
         setStatusCode(error.response.status);
-       
 
         // Handle error response from the backend
         // ...
@@ -91,6 +93,7 @@ const RegisterForm = (props) => {
       setFormErrors(errors);
     }
   };
+
   const validateForm = () => {
     const errors = {};
 
@@ -117,10 +120,12 @@ const RegisterForm = (props) => {
     // Validate age
     if (age.trim() === "") {
       errors.age = "Age is required";
+    } else if (currentDate.diff(formatDate(age), "year") < 18) {
+      errors.age = "Age should be 18 years or above";
     }
 
     // Validate blood group
-    if (bloodGroup.trim() === "") {
+    if (bloodGroup === "") {
       errors.bloodGroup = "Blood group is required";
     }
 
@@ -140,304 +145,189 @@ const RegisterForm = (props) => {
     }
 
     // Validate last donated date
-    // if (!lastDonatedDate || lastDonatedDate.isBefore(currentDate, "day")) {
-    //   errors.lastDonatedDate =
-    //     "Last donated date is required and should be in the future";
-    // }
+    if (lastDonatedDate.trim() === "") {
+      errors.lastDonatedDate = "Last donated date is required";
+    } else if (dayjs(formatDate(lastDonatedDate)).isAfter(currentDate)) {
+      errors.lastDonatedDate = "Last donated date cannot be in the future";
+    }
 
     return errors;
   };
 
-  const bloodgroup = [
-    {
-      value: "O+",
-      label: "O+",
-    },
-    {
-      value: "A+",
-      label: "A+",
-    },
-    {
-      value: "A-",
-      label: "A-",
-    },
-    {
-      value: "AB+",
-      label: "AB+",
-    },
-    {
-      value: "AB-",
-      label: "AB-",
-    },
-    {
-      value: "O-",
-      label: "O-",
-    },
-    {
-      value: "B+",
-      label: "B+",
-    },
-    {
-      value: "B-",
-      label: "B-",
-    },
-  ];
-
-  const state1 = [
-    {
-      value: "Kerala",
-      label: "Kerala",
-    },
-  ];
-
-  const district1 = [
-    {
-      value: "Alappuzha",
-      label: "Alappuzha",
-    },
-    {
-      value: "Idukki",
-      label: "Idukki",
-    },
-    {
-      value: "Kannur",
-      label: "Kannur",
-    },
-    {
-      value: "Kasaragod",
-      label: "Kasaragod",
-    },
-    {
-      value: "Kollam",
-      label: "Kollam",
-    },
-    {
-      value: "Kottayam",
-      label: "Kottayam",
-    },
-    {
-      value: "Kozhikode",
-      label: "Kozhikode",
-    },
-    {
-      value: "Ernakulam",
-      label: "Ernakulam",
-    },
-
-    {
-      value: "Malappuram",
-      label: "Malappuram",
-    },
-    {
-      value: "Thrissur",
-      label: "Thrissur",
-    },
-    {
-      value: "Palakkad",
-      label: "Palakkad",
-    },
-    {
-      value: "Pathanamthitta",
-      label: "Pathanamthitta",
-    },
-    {
-      value: "Thiruvananthapuram",
-      label: "Thiruvananthapuram",
-    },
-    {
-      value: "Wayanad",
-      label: "Wayanad",
-    },
-  ];
-
   return (
-    <>
-      <Container maxWidth="sm" className="reg_cont">
-        <div
-          className="header2"
-          style={{
-            padding: "0 27px 0 37px",
-            justifyContent: "center",
+    <Container maxWidth="xs" className="register-container">
+      <div className="register-content">
+        <Box
+          sx={{
             display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
           }}
         >
-          <Typography variant="h4" gutterBottom className="header_cont">
-            Register As Donor
+          <TaskAltIcon sx={{ fontSize: 60, color: "#f44336" }} />
+          <Typography component="h1" variant="h5" mt={2}>
+            Register as a Donor
           </Typography>
-        </div>
-        <form onSubmit={handleSubmit}>
+        </Box>
+        <form onSubmit={handleSubmit} className="register-form">
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
-                label="First Name"
                 variant="outlined"
                 fullWidth
+                label="First Name"
+                name="firstName"
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
-                required
-                error={!!formErrors.firstName}
+                error={formErrors.firstName !== undefined}
                 helperText={formErrors.firstName}
+                required
               />
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
-                label="Last Name"
                 variant="outlined"
                 fullWidth
+                label="Last Name"
+                name="lastName"
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
-                required
-                error={!!formErrors.lastName}
+                error={formErrors.lastName !== undefined}
                 helperText={formErrors.lastName}
+                required
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
-                label="Phone Number"
                 variant="outlined"
                 fullWidth
+                label="Phone Number"
+                name="phoneNumber"
                 value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}
-                required
-                error={!!formErrors.phoneNumber}
+                error={formErrors.phoneNumber !== undefined}
                 helperText={formErrors.phoneNumber}
+                required
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
-                label="Address"
                 variant="outlined"
                 fullWidth
-                multiline
-                rows={4}
+                label="Address"
+                name="address"
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
-                required
-                error={!!formErrors.address}
+                error={formErrors.address !== undefined}
                 helperText={formErrors.address}
+                required
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12}>
               <TextField
-                label="Date of Birth"
-                fullWidth
-                type="date"
-                // label ="Last Donated"
                 variant="outlined"
-                color="secondary"
-                // helperText="Age"
+                fullWidth
+                label="Age"
+                name="age"
+                type="date"
                 value={age}
                 onChange={(e) => setAge(e.target.value)}
+                InputLabelProps={{ shrink: true }}
+                error={formErrors.age !== undefined}
+                helperText={formErrors.age}
                 required
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                error={!!formErrors.age}
-                // helperText={formErrors.age}
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12}>
               <TextField
+                variant="outlined"
+                fullWidth
                 select
                 label="Blood Group"
-                variant="outlined"
-                fullWidth
+                name="bloodGroup"
                 value={bloodGroup}
                 onChange={(e) => setBloodGroup(e.target.value)}
-                required
-                error={!!formErrors.bloodGroup}
+                error={formErrors.bloodGroup !== undefined}
                 helperText={formErrors.bloodGroup}
+                required
               >
-                {bloodgroup.map((option) => (
-                  <MenuItem key={option.value} value={option.value}>
-                    {option.label}
-                  </MenuItem>
-                ))}
+                <MenuItem value="A+">A+</MenuItem>
+                <MenuItem value="A-">A-</MenuItem>
+                <MenuItem value="B+">B+</MenuItem>
+                <MenuItem value="B-">B-</MenuItem>
+                <MenuItem value="AB+">AB+</MenuItem>
+                <MenuItem value="AB-">AB-</MenuItem>
+                <MenuItem value="O+">O+</MenuItem>
+                <MenuItem value="O-">O-</MenuItem>
               </TextField>
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
-                select
-                label="District"
                 variant="outlined"
                 fullWidth
+                label="District"
+                name="district"
                 value={district}
                 onChange={(e) => setDistrict(e.target.value)}
-                required
-                error={!!formErrors.district}
+                error={formErrors.district !== undefined}
                 helperText={formErrors.district}
-              >
-                {district1.map((option) => (
-                  <MenuItem key={option.value} value={option.value}>
-                    {option.label}
-                  </MenuItem>
-                ))}
-              </TextField>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                select
-                label="State"
-                variant="outlined"
-                fullWidth
-                value={state}
-                onChange={(e) => setState(e.target.value)}
                 required
-                error={!!formErrors.state}
-                helperText={formErrors.state}
-              >
-                {state1.map((option) => (
-                  <MenuItem key={option.value} value={option.value}>
-                    {option.label}
-                  </MenuItem>
-                ))}
-              </TextField>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                label="Pincode"
-                variant="outlined"
-                fullWidth
-                value={pincode}
-                onChange={(e) => setPincode(e.target.value)}
-                required
-                error={!!formErrors.pincode}
-                helperText={formErrors.pincode}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
-                type="date"
-                label="Last Donated"
                 variant="outlined"
-                color="secondary"
-                // helperText="Last Donation"
-                InputLabelProps={{
-                  shrink: true,
-                }}
                 fullWidth
+                label="State"
+                name="state"
+                value={state}
+                onChange={(e) => setState(e.target.value)}
+                error={formErrors.state !== undefined}
+                helperText={formErrors.state}
+                required
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                fullWidth
+                label="Pincode"
+                name="pincode"
+                value={pincode}
+                onChange={(e) => setPincode(e.target.value)}
+                error={formErrors.pincode !== undefined}
+                helperText={formErrors.pincode}
+                required
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                fullWidth
+                label="Last Donated Date"
+                name="lastDonatedDate"
+                type="date"
                 value={lastDonatedDate}
                 onChange={(e) => setLastDonatedDate(e.target.value)}
-                required
-                error={!!formErrors.lastDonatedDate}
+                InputLabelProps={{ shrink: true }}
+                error={formErrors.lastDonatedDate !== undefined}
                 helperText={formErrors.lastDonatedDate}
+                required
               />
             </Grid>
           </Grid>
-          <Box display="flex" justifyContent="flex-end">
-            <Button
-              type="submit"
-              variant="outlined"
-              startIcon={<TaskAltIcon />}
-              style={{ marginTop: "1rem" }}
-              color="secondary"
-            >
-              Submit
-            </Button>
-          </Box>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className="register-submit-button"
+          >
+            Register
+          </Button>
         </form>
-      </Container>
-    </>
+      </div>
+    </Container>
   );
 };
 

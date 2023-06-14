@@ -1,78 +1,74 @@
-
+import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
-import './Login.css'
-import { Button } from '@mui/material'
-import React, { useState, useContext } from 'react';
-// import { Button, TextField } from '@mui/material';
-import './Login.css';
-import { useNavigate} from "react-router-dom";
-import AuthService from '../Services/auth-service';
+import Button from '@mui/material/Button';
+import axios from 'axios';
 
-
-const Login = (props) => {
-  props.setShowBackground(false);
+const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  
-  const navigate = useNavigate();
 
-  const handleSubmit = async(e) => { 
-    // Perform JWT authentication using email and password
-
-    // Call an authentication API endpoint to obtain the JWT token
-    // Set the authentication tokens using setAuthTokens function from the AuthContext
-    e.preventDefault();
-    try {
-      await AuthService.login(email, password).then(
-        () => {
-          navigate("/register");
-          window.location.reload();
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
-    } catch (err) {
-      console.log(err);
-    }
-  
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
   };
 
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+  };
 
+  const handleLogin = async () => {
+    try {
+      const response = await axios.post('https://04e3-2405-201-f001-a1c4-34a3-586d-241b-1f81.ngrok-free.app/users/login/', {
+        email: email,
+        password: password
+      });
+
+      const { access, refresh } = response.data;
+      localStorage.setItem('accessToken', access);
+      localStorage.setItem('refreshToken', refresh);
+      
+
+      // Perform any additional actions after successful login, e.g., redirect to a different page
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div className='login_cont'>
-      <form onSubmit={handleSubmit}>
       <h1>Log In</h1>
-        
-      {/* <div className='field_cont'> */}
-    
-      <TextField  label="Email" variant="outlined"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <br></br>
-      <TextField  label="Password" variant="outlined"
-        type='password'
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      {/* </div> */}
+      <div className='field_cont'>
+        <TextField
+          id="email"
+          label="Email"
+          variant="outlined"
+          value={email}
+          onChange={handleEmailChange}
+        />
+        <br />
+        <TextField
+          id="password"
+          label="Password"
+          variant="outlined"
+          value={password}
+          onChange={handlePasswordChange}
+        />
+      </div>
       <div className='login_button_cont'>
-      <Button   sx={{color:'#ffffff' ,
-                        backgroundColor: "#000000",
-                        border: "2px black solid",
-                        "&:hover": {bordercolor: '2px black solid'
-                                    , backgroundColor: "#000000"},
-                           }} 
-                           variant="contained"
-                           
-                           >Submit</Button>
-                          
+        <Button
+          sx={{
+            color: '#ffffff',
+            backgroundColor: "#000000",
+            border: "2px black solid",
+            "&:hover": { bordercolor: '2px black solid', backgroundColor: "#000000" }
+          }}
+          variant="contained"
+          onClick={handleLogin}
+        >
+          Submit
+        </Button>
+      </div>
     </div>
-    </form>
-    </div>
-  )
-}
+  );
+};
 
-export default Login
+export default LoginForm;
