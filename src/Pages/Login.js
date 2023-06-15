@@ -2,8 +2,13 @@ import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom'
 
 const LoginForm = () => {
+
+ 
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -17,7 +22,7 @@ const LoginForm = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post('https://04e3-2405-201-f001-a1c4-34a3-586d-241b-1f81.ngrok-free.app/users/login/', {
+      const response = await axios.post('https://3882-103-163-113-106.ngrok-free.app/users/login/', {
         email: email,
         password: password
       });
@@ -25,6 +30,8 @@ const LoginForm = () => {
       const { access, refresh } = response.data;
       localStorage.setItem('accessToken', access);
       localStorage.setItem('refreshToken', refresh);
+
+      navigate('/register');
       
 
       // Perform any additional actions after successful login, e.g., redirect to a different page
