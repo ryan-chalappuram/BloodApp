@@ -2,16 +2,18 @@ import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import axios from 'axios';
+import './Login.css'
 import { useNavigate } from 'react-router-dom'
 
-const LoginForm = () => {
+const LoginForm = (props) => {
+  props.setShowBackground(false);
 
  
   const navigate = useNavigate();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
+  const [notverif, setNotVerif] = useState(false);
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
   };
@@ -26,7 +28,8 @@ const LoginForm = () => {
         email: email,
         password: password
       });
-
+     
+      
       const { access, refresh } = response.data;
       localStorage.setItem('accessToken', access);
       localStorage.setItem('refreshToken', refresh);
@@ -36,6 +39,9 @@ const LoginForm = () => {
 
       // Perform any additional actions after successful login, e.g., redirect to a different page
     } catch (error) {
+      if (error.response && error.response.status === 403) {
+        setNotVerif(true);
+       } else
       console.error(error);
     }
   };
@@ -60,6 +66,7 @@ const LoginForm = () => {
           onChange={handlePasswordChange}
         />
       </div>
+     { notverif && <p>Please check password or e-mail not verified</p>}
       <div className='login_button_cont'>
         <Button
           sx={{
