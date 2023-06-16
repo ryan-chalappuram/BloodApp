@@ -41,7 +41,7 @@ const RegisterForm = (props) => {
       };
 
       const response = await axios.get(
-        "https://3882-103-163-113-106.ngrok-free.app/users/profile/",
+        "https://secutus.serveo.net/users/profile/",
         { headers }
       );
 
