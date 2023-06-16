@@ -5,6 +5,7 @@ import { RiCloseLine, RiMenu3Line } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import imgsrc from "../Images/profile-icon.png"
 import './Header.css'
+import { useNavigate } from 'react-router-dom'
 
 const Menu = () => (
   <>
@@ -17,14 +18,17 @@ const Menu = () => (
   </>
 );
 
+
 export default function Header(props) {
+  const navigate = useNavigate();
   const [toggleMenu, setToggleMenu] = React.useState(false);
   const [toggleProfileMenu, setToggleProfileMenu] = React.useState(false);
   const accessToken = localStorage.getItem("accessToken");
 
   const handleLogout = () => {
     localStorage.removeItem("accessToken");
-    window.location.reload();
+    navigate('/');
+    
   };
 
   const renderAuthButtons = () => {
@@ -45,8 +49,8 @@ export default function Header(props) {
             <div className="profile-menu">
               
                 
-                  <Link to="/profile"> <Button>View Profile</Button></Link>
-                 <Button onClick={handleLogout}>Logout</Button>
+                  <Link to="/profile"> <Button sx={{color: 'black'}}>View Profile</Button></Link>
+                 <Button sx={{color: 'black'} } onClick={handleLogout}>Logout</Button>
              
             </div>
           )}

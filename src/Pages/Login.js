@@ -24,7 +24,7 @@ const LoginForm = (props) => {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post('https://3882-103-163-113-106.ngrok-free.app/users/login/', {
+      const response = await axios.post('https://secutus.serveo.net/users/login/', {
         email: email,
         password: password
       });

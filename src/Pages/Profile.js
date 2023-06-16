@@ -1,32 +1,43 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Profile.css";
+import errorimg from "../Images/errorimg.png"
+
+import Button from "@mui/material/Button";
 
 const Profile = (props) => {
   const [profileData, setProfileData] = useState(null);
-
+  const [telegramverif, setTelegramVerif] = useState(true);
+  const [telegramveriflink, setTelegramVerifLink] = useState("");
+  
   useEffect(() => {
     fetchProfileData();
     getTelegramData();
     props.setShowBackground(false);
   }, []);
+  
   const getTelegramData = async () => {
     try {
       const accessToken = localStorage.getItem("accessToken");
-  
+
       const response = await axios.get(
-        "https://04e3-2405-201-f001-a1c4-34a3-586d-241b-1f81.ngrok-free.app/telebot/userdata/",
+        "https://secutus.serveo.net/telebot/userdata/",
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           }
-        
         }
       );
-  
+
       if (response.status === 200) {
-        const data = response.data;
-        console.log(data);
+        const teledata = response.data;
+        console.log(teledata);
+        const verif = teledata.is_telegram_verified;
+        const verif_link = teledata.telegram_verification_link;
+        setTelegramVerif(verif);
+        setTelegramVerifLink(verif_link);
+        
+       
         // Process the retrieved data here
       } else {
         console.error("Failed to fetch Telegram data");
@@ -35,15 +46,13 @@ const Profile = (props) => {
       console.error("Error while fetching Telegram data:", error);
     }
   };
-  
 
   const fetchProfileData = async () => {
     try {
       const accessToken = localStorage.getItem("accessToken");
-      
 
       const response = await axios.get(
-        "https://04e3-2405-201-f001-a1c4-34a3-586d-241b-1f81.ngrok-free.app/users/getprofiledata/",
+        "https://secutus.serveo.net/users/getprofiledata/",
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -79,6 +88,29 @@ const Profile = (props) => {
     return null;
   };
 
+
+  const renderTelegramVerificationLink = () => {
+    
+      return (
+        <div className="tele-verif-cont">
+          <div className="tele-dets">
+            <img src={errorimg} alt="Error" />
+            <h4>Telegram not verified</h4>
+            <h4
+              className="verify-link"
+              onClick={() => window.open(telegramveriflink, "_blank")}
+            >
+              Click Here
+            </h4>
+          </div>
+        </div>
+      );
+    
+    
+  };
+  
+  
+
   return (
     <div className="overall">
       <div className="profile-container">
@@ -99,11 +131,15 @@ const Profile = (props) => {
           </div>
         </div>
       </div>
-
+      <div>
+      {  !telegramverif &&
+        renderTelegramVerificationLink() }
+      </div>
       <div className="card1">
         <h5 className="card-title">About</h5>
-
+       
         {renderProfileDetails()}
+       
 
         <div className="container"></div>
       </div>
