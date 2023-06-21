@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import axios from 'axios';
 import './Login.css'
 import { useNavigate } from 'react-router-dom'
+import ApiContext from '../ApiContext';
 
 const LoginForm = (props) => {
   props.setShowBackground(false);
+  const apiUrl = useContext(ApiContext);
 
  
   const navigate = useNavigate();
@@ -24,7 +26,7 @@ const LoginForm = (props) => {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post('https://secutus.serveo.net/users/login/', {
+      const response = await axios.post(`${apiUrl}users/login/`, {
         email: email,
         password: password
       });

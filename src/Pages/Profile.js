@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useContext } from "react";
 import axios from "axios";
 import "./Profile.css";
+import ApiContext from '../ApiContext';
 import errorimg from "../Images/errorimg.png"
 
 import Button from "@mui/material/Button";
 
 const Profile = (props) => {
+  const apiUrl = useContext(ApiContext);
   const [profileData, setProfileData] = useState(null);
   const [telegramverif, setTelegramVerif] = useState(true);
   const [telegramveriflink, setTelegramVerifLink] = useState("");
@@ -21,7 +23,7 @@ const Profile = (props) => {
       const accessToken = localStorage.getItem("accessToken");
 
       const response = await axios.get(
-        "https://secutus.serveo.net/telebot/userdata/",
+        `${apiUrl}telebot/userdata/`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -52,7 +54,7 @@ const Profile = (props) => {
       const accessToken = localStorage.getItem("accessToken");
 
       const response = await axios.get(
-        "https://secutus.serveo.net/users/getprofiledata/",
+        `${apiUrl}users/getprofiledata/`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,

@@ -1,5 +1,6 @@
-import React, { useState,useEffect} from "react";
+import React, { useState,useEffect, useContext} from "react";
 import axios from "axios";
+import ApiContext from '../ApiContext';
 import {
   TextField,
   Button,
@@ -14,6 +15,7 @@ import "./Register.css";
 import dayjs from "dayjs";
 
 const RegisterForm = (props) => {
+  const apiUrl = useContext(ApiContext);
   props.setShowBackground(false);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -41,7 +43,7 @@ const RegisterForm = (props) => {
       };
 
       const response = await axios.get(
-        "https://secutus.serveo.net/users/profile/",
+        `${apiUrl}users/profile/`,
         { headers }
       );
 

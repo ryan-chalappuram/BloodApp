@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState,useContext } from 'react';
 import TextField from '@mui/material/TextField';
 import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
+import ApiContext from '../ApiContext';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './Signup.css';
 
 const Signup = (props) => {
+  const apiUrl = useContext(ApiContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [emailError, setEmailError] = useState('');
@@ -44,7 +46,7 @@ const Signup = (props) => {
     };
 
     try {
-      const response = await axios.post('https://04e3-2405-201-f001-a1c4-34a3-586d-241b-1f81.ngrok-free.app/users/signup/', formData);
+      const response = await axios.post(`${apiUrl}users/signup/`, formData);
       console.log(response.status); 
       console.log(response.data);
       

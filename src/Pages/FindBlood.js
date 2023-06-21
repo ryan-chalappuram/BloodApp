@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {
   Typography,
   TextField,
@@ -11,6 +11,7 @@ import {
 } from '@mui/material';
 import './FindBlood.css';
 import axios from 'axios';
+import ApiContext from '../ApiContext';
 
 const bloodGroups = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
 const districts = [
@@ -31,6 +32,7 @@ const districts = [
 ];
 
 const BloodRequirementForm = (props) => {
+  const apiUrl = useContext(ApiContext);
   props.setShowBackground(false);
   const [bloodGroup, setBloodGroup] = useState('');
   const [name, setName] = useState('');
@@ -58,7 +60,7 @@ const BloodRequirementForm = (props) => {
      
 
     try {
-      const response = await axios.post('https://a778-2409-4073-208e-9992-3c64-319-d54f-8664.ngrok-free.app/bloodreq/findblood/', formData);
+      const response = await axios.post(`${apiUrl}bloodreq/findblood/`, formData);
       console.log(response.data);
       setShowSnackbar(true);
       resetForm();

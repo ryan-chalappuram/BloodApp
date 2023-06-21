@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState , useContext} from "react";
 import axios from "axios";
+import ApiContext from '../ApiContext';
 import {
   TextField,
   Button,
@@ -14,6 +15,8 @@ import "./Register.css";
 import dayjs from "dayjs";
 
 const RegisterForm = (props) => {
+  
+ const apiUrl = useContext(ApiContext);
   props.setShowBackground(false);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -59,7 +62,7 @@ const RegisterForm = (props) => {
         };
 
         const response = await axios.post(
-          "https://3882-103-163-113-106.ngrok-free.app/users/profileupdate/", 
+          `${apiUrl}users/profileupdate/`, 
           formData,
           { headers }
         );

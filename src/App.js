@@ -9,6 +9,7 @@ import Register from "./Pages/Register"
 import EditProfile from "./Pages/EditProfile";
 import FindBlood from "./Pages/FindBlood";
 import Profile from "./Pages/Profile";
+import { ApiProvider } from "./ApiContext";
 function App() {
   const location = useLocation();
   const [showBackground, setShowBackground] = useState(true);
@@ -27,19 +28,22 @@ function App() {
 
 
   return (
+   
     <div>
       <div
         className={`home_container ${showBackground ? "with-background" : ""}`}
       >
         <Header  />
+        <ApiProvider>
         <Routes>
-
+        
         <Route path="/" element={<Home setShowBackground={setShowBackground}/>} />
           <Route path="/findblood" element={<FindBlood setShowBackground={setShowBackground}/>} />
 
           <Route path="/login" element={<Login setShowBackground={setShowBackground}/>} />
             
           <Route path="/registernow" element={<Signup setShowBackground={setShowBackground}/> } />
+          
 
           {isLoggedIn && (
             <>
@@ -53,9 +57,11 @@ function App() {
           </>
           )}
         </Routes>
+        </ApiProvider>
          
     </div>
     </div>
+    
   );
 }
 
