@@ -16,6 +16,7 @@ const LoginForm = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [notverif, setNotVerif] = useState(false);
+  const [isfilled,setIsFilled] = useState();
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
   };
@@ -35,11 +36,30 @@ const LoginForm = (props) => {
       const { access, refresh } = response.data;
       localStorage.setItem('accessToken', access);
       localStorage.setItem('refreshToken', refresh);
-
-      navigate('/register');
+      const accessToken = localStorage.getItem("accessToken");
       
+      
+      const profileresponse = await axios.get(
+        `${apiUrl}users/getprofiledata/`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+      if(profileresponse.status === 200)
+      {
+      const profiledata=profileresponse.data;
+     setIsFilled(profiledata.is_profile_complete);
+     
+      }
+      if(isfilled){
+        navigate('/');
+      }
+      else
+      navigate('/register')
 
-      // Perform any additional actions after successful login, e.g., redirect to a different page
+      
     } catch (error) {
       if (error.response && error.response.status === 403) {
         setNotVerif(true);
@@ -49,6 +69,7 @@ const LoginForm = (props) => {
   };
 
   return (
+    
     <div className='login_cont'>
       <h1>Log In</h1>
       <div className='field_cont'>

@@ -45,7 +45,7 @@ function App() {
           <Route path="/registernow" element={<Signup setShowBackground={setShowBackground}/> } />
           
 
-          {isLoggedIn && (
+        
             <>
 
         <Route path="/profile"element={<Profile setShowBackground={setShowBackground} />} />
@@ -55,7 +55,7 @@ function App() {
           <Route path="/edit" element={<EditProfile setShowBackground={setShowBackground}/>} />
           <Route path="/register" element={<Register setShowBackground={setShowBackground}/>} />
           </>
-          )}
+          
         </Routes>
         </ApiProvider>
          
