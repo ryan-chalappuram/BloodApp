@@ -1,4 +1,5 @@
-import React from "react";
+import { useEffect } from "react";
+import React  from "react";
 import bloodlogo from "../Images/Logo.png";
 import Button from "@mui/material/Button";
 import { RiCloseLine, RiMenu3Line } from "react-icons/ri";
@@ -24,10 +25,11 @@ export default function Header(props) {
   const [toggleMenu, setToggleMenu] = React.useState(false);
   const [toggleProfileMenu, setToggleProfileMenu] = React.useState(false);
   const accessToken = localStorage.getItem("accessToken");
-
+ 
   const handleLogout = () => {
     localStorage.removeItem("accessToken");
     navigate('/');
+    setToggleProfileMenu(false);
     
   };
 
@@ -116,21 +118,22 @@ export default function Header(props) {
               <div className="header-menu_container_links">
                 <Menu />
                 <div className="header-menu_button">
-                  <Link to="/registernow">
-                    <p>Register Now</p>
-                  </Link>
+                
                   {accessToken ? (
                     <div
                       className="profile-picture"
-                      onClick={() => setToggleProfileMenu(!toggleProfileMenu)}
+                      onClick={() => handleLogout() }
                     >
-                      <img
-                        src="default-profile-picture.png" // Replace with the URL of the default profile picture
-                        alt="Profile"
-                      />
+                      <p>Log Out</p>
+                     
                     </div>
                   ) : (
-                    <Button
+                    <div>
+                  
+                    <Link to="/registernow">
+                    <p>Register Now</p>
+                  </Link>
+                  <Button
                       component={Link}
                       to="/login"
                       sx={{
@@ -145,6 +148,7 @@ export default function Header(props) {
                     >
                       Log in
                     </Button>
+                    </div>
                   )}
                   {toggleProfileMenu && (
                     <div className="profile-menu">

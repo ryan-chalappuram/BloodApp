@@ -1,0 +1,19 @@
+.open-con {
+    margin-top: 60px;
+    margin-left: 80px;
+    margin-right: 80px;
+    border-radius: 50px;
+    padding: 40px 50px 50px 40px;
+
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+@media screen and (max-width: 550px) {
+    .open-con {
+
+        padding: 30px;
+        margin-left: 20px;
+        margin-right: 20px;
+
+    }
+}

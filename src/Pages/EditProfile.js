@@ -96,7 +96,7 @@ const RegisterForm = (props) => {
         };
 
         const response = await axios.post(
-          "https://04e3-2405-201-f001-a1c4-34a3-586d-241b-1f81.ngrok-free.app/users/profileupdate/", 
+          `${apiUrl}users/profileupdate/`, 
           formData,
           { headers }
         );

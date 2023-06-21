@@ -4,7 +4,7 @@ import React from 'react';
 const ApiContext = React.createContext();
 
 export const ApiProvider = ({ children }) => {
-  const apiUrl = 'https://priores.serveo.net/'; // Replace with your actual API URL
+  const apiUrl = 'https://laeve.serveo.net/'; 
 
   return (
     <ApiContext.Provider value={apiUrl}>

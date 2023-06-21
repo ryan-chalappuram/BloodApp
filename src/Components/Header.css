@@ -18,3 +18,7 @@
     box-shadow: 0 0 5 rgba(0, 0, 0, 0.2);
     box-sizing: border-box;
 }
+
+.header-menu_button img {
+    width: 20px;
+}
