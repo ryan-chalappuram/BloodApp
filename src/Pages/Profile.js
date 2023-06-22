@@ -3,6 +3,7 @@ import axios from "axios";
 import "./Profile.css";
 import ApiContext from '../ApiContext';
 import errorimg from "../Images/errorimg.png"
+import profimg from "../Images/profileimg.png"
 import { Link } from 'react-router-dom';
 import Button from "@mui/material/Button";
 
@@ -77,21 +78,43 @@ const Profile = (props) => {
 
   const renderProfileDetails = () => {
     if (profileData) {
+      const detailMapping = {
+        user_email: "Email",
+        first_name: "First Name",
+        last_name: "Last Name",
+        phone_number: "Phone Number",
+        address: "Address",
+        district: "District",
+        pincode: "Pincode",
+        dateofbirth: "Date of Birth",
+        blood_group: "Blood Group",
+        last_donated_on: "Last Donated On",
+      };
+  
       const entries = Object.entries(profileData);
-      const maxLength = Math.max(...entries.map(([key]) => key.length));
-
-      return entries.map(([key, value], index) => (
-        <div className="flex" key={key}>
-          <div className="key" style={{ width: `${maxLength}ch` }}>
-            {key}
+  
+      return entries.map(([key, value], index) => {
+        if (!detailMapping.hasOwnProperty(key)) {
+          return null; // Skip rendering if key is not in detailMapping
+        }
+  
+        const maxLength = Math.max(key.length, detailMapping[key].length);
+  
+        return (
+          <div className="flex" key={key}>
+            <div className="key" >
+              {detailMapping[key]}
+            </div>
+            <div className="value">{value}</div>
           </div>
-          <div className="value">{value}</div>
-        </div>
-      ));
+        );
+      });
     }
+  
     return null;
   };
-
+  
+  
 
   const renderTelegramVerificationLink = () => {
 
@@ -124,12 +147,12 @@ const Profile = (props) => {
         <div className="profile-info">
           <div className="profile-details">
             <img
-              src="https://th.bing.com/th/id/OIP.Ck2Usj84bIh_SiI2QJ7b-QHaEp?pid=ImgDet&rs=1"
+              src={profimg}
               alt="Profile Image"
               className="profile-image"
             />
             <div className="profile-name">
-              <h2> Name </h2>
+              <h2> {profileData.first_name} </h2>
               {/* Additional profile details */}
             </div>
           </div>

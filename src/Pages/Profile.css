@@ -111,11 +111,15 @@
 
 .flex {
   display: flex;
+  align-items: flex-start;
   gap: 150px;
   padding-left: 20px;
-
-
 }
+
+.flex .key {
+  min-width: 150px; /* Set a minimum width for the key element */
+}
+
 
 
 .overall {
