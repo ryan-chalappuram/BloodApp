@@ -43,11 +43,12 @@ const RegisterForm = (props) => {
       };
 
       const response = await axios.get(
-        `${apiUrl}users/profile/`,
+        `${apiUrl}users/getprofiledata/`,
         { headers }
       );
 
       const userData = response.data;
+      console.log(userData);
 
       setFirstName(userData.first_name);
       setLastName(userData.last_name);
@@ -56,9 +57,9 @@ const RegisterForm = (props) => {
       setAge(formatDate(userData.dateofbirth));
       setBloodGroup(userData.blood_group);
       setDistrict(userData.district);
-      setState(userData.state);
+      // setState(userData.state);
       setPincode(userData.pincode);
-      setLastDonatedDate(formatDate(userData.lastDonatedDate));
+      // setLastDonatedDate(formatDate(userData.lastDonatedDate));
     } catch (error) {
       console.error("Error:", error);
       // Handle error response from the backend
@@ -85,8 +86,8 @@ const RegisterForm = (props) => {
           pincode:pincode,
           dateofbirth:formatDate(age),
           blood_group:bloodGroup,
-          state:state,
-          lastDonatedDate:formatDate(lastDonatedDate),
+          // state:state,
+          // lastDonatedDate:formatDate(lastDonatedDate),
         };
 
         const accessToken = localStorage.getItem("accessToken");
@@ -106,6 +107,8 @@ const RegisterForm = (props) => {
         // Set the status code
         console.log(response.status);
 
+        
+
         // Clear form fields and show success message
         setFirstName("");
         setLastName("");
@@ -114,9 +117,9 @@ const RegisterForm = (props) => {
         setAge("");
         setBloodGroup("");
         setDistrict("");
-        setState("");
+        // setState("");
         setPincode("");
-        setLastDonatedDate("");
+        // setLastDonatedDate("");
         setFormErrors({});
       } catch (error) {
         console.error("Error:", error);
@@ -172,10 +175,10 @@ const RegisterForm = (props) => {
       errors.district = "District is required";
     }
 
-    // Validate state
-    if (state.trim() === "") {
-      errors.state = "State is required";
-    }
+    // // Validate state
+    // if (state.trim() === "") {
+    //   errors.state = "State is required";
+    // }
 
     // Validate pincode
     if (pincode.trim() === "") {
@@ -188,11 +191,9 @@ const RegisterForm = (props) => {
     //     "Last donated date is required and should be in the future";
     // }
 
-    if (lastDonatedDate.trim() === "") {
-      errors.lastDonatedDate = "Last donated date is required";
-    } else if (dayjs(formatDate(lastDonatedDate)).isAfter(currentDate)) {
-      errors.lastDonatedDate = "Last donated date cannot be in the future";
-    }
+    //  if (dayjs(formatDate(lastDonatedDate)).isAfter(currentDate)) {
+    //   errors.lastDonatedDate = "Last donated date cannot be in the future";
+    // }
 
 
     return errors;
@@ -233,12 +234,12 @@ const RegisterForm = (props) => {
     },
   ];
 
-  const state1 = [
-    {
-      value: "Kerala",
-      label: "Kerala",
-    },
-  ];
+  // const state1 = [
+  //   {
+  //     value: "Kerala",
+  //     label: "Kerala",
+  //   }
+  // ];
 
   const district1 = [
     {
@@ -299,6 +300,8 @@ const RegisterForm = (props) => {
       label: "Wayanad",
     },
   ];
+
+
 
   return (
     <>
@@ -423,7 +426,7 @@ const RegisterForm = (props) => {
                 ))}
               </TextField>
             </Grid>
-            <Grid item xs={12} sm={6}>
+            {/* <Grid item xs={12} sm={6}>
               <TextField
                 select
                 label="State"
@@ -441,7 +444,7 @@ const RegisterForm = (props) => {
                   </MenuItem>
                 ))}
               </TextField>
-            </Grid>
+            </Grid> */}
             <Grid item xs={12} sm={6}>
               <TextField
                 label="Pincode"
@@ -454,24 +457,23 @@ const RegisterForm = (props) => {
                 helperText={formErrors.pincode}
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            {/* <Grid item xs={12} sm={6}>
               <TextField
                 type="date"
                 label="Last Donated"
                 variant="outlined"
                 color="secondary"
                 // helperText="Last Donation"
+                value={lastDonatedDate}
+                onChange={(e) => setLastDonatedDate(e.target.value)}
                 InputLabelProps={{
                   shrink: true,
                 }}
                 fullWidth
-                value={lastDonatedDate}
-                onChange={(e) => setLastDonatedDate(e.target.value)}
-                required
                 error={!!formErrors.lastDonatedDate}
                 helperText={formErrors.lastDonatedDate}
               />
-            </Grid>
+            </Grid> */}
           </Grid>
           <Box display="flex" justifyContent="flex-end">
             <Button

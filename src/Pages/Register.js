@@ -25,7 +25,6 @@ const RegisterForm = (props) => {
   const [age, setAge] = useState("");
   const [bloodGroup, setBloodGroup] = useState("");
   const [district, setDistrict] = useState("");
-  const [state, setState] = useState("");
   const [pincode, setPincode] = useState("");
   const [lastDonatedDate, setLastDonatedDate] = useState("");
   const [formErrors, setFormErrors] = useState({});
@@ -51,7 +50,6 @@ const RegisterForm = (props) => {
           pincode:pincode,
           dateofbirth:formatDate(age),
           blood_group:bloodGroup,
-          state:state,
           lastDonatedDate:formatDate(lastDonatedDate),
         };
 
@@ -67,6 +65,8 @@ const RegisterForm = (props) => {
           { headers }
         );
 
+        console.log(formData);
+
         console.log(response.data); // Handle successful response from the backend
 
         // Set the status code
@@ -80,7 +80,6 @@ const RegisterForm = (props) => {
         setAge("");
         setBloodGroup("");
         setDistrict("");
-        setState("");
         setPincode("");
         setLastDonatedDate("");
         setFormErrors({});
@@ -138,11 +137,6 @@ const RegisterForm = (props) => {
       errors.district = "District is required";
     }
 
-    // Validate state
-    if (state.trim() === "") {
-      errors.state = "State is required";
-    }
-
     // Validate pincode
     if (pincode.trim() === "") {
       errors.pincode = "Pincode is required";
@@ -154,9 +148,7 @@ const RegisterForm = (props) => {
     //     "Last donated date is required and should be in the future";
     // }
 
-    if (lastDonatedDate.trim() === "") {
-      errors.lastDonatedDate = "Last donated date is required";
-    } else if (dayjs(formatDate(lastDonatedDate)).isAfter(currentDate)) {
+     if (dayjs(formatDate(lastDonatedDate)).isAfter(currentDate)) {
       errors.lastDonatedDate = "Last donated date cannot be in the future";
     }
 
@@ -199,12 +191,7 @@ const RegisterForm = (props) => {
     },
   ];
 
-  const state1 = [
-    {
-      value: "Kerala",
-      label: "Kerala",
-    },
-  ];
+ 
 
   const district1 = [
     {
@@ -267,12 +254,13 @@ const RegisterForm = (props) => {
   ];
 
   return (
+    
     <>
       <Container maxWidth="sm" className="reg_cont">
         <div
           className="header2"
           style={{
-            padding: "0 27px 0 37px",
+            padding: "0 27px 0 35px",
             justifyContent: "center",
             display: "flex",
           }}
@@ -389,8 +377,8 @@ const RegisterForm = (props) => {
                 ))}
               </TextField>
             </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
+            {/* <Grid item xs={12} sm={6}> */}
+              {/* <TextField
                 select
                 label="State"
                 variant="outlined"
@@ -406,8 +394,8 @@ const RegisterForm = (props) => {
                     {option.label}
                   </MenuItem>
                 ))}
-              </TextField>
-            </Grid>
+              </TextField> */}
+            {/* </Grid> */}
             <Grid item xs={12} sm={6}>
               <TextField
                 label="Pincode"
@@ -421,7 +409,13 @@ const RegisterForm = (props) => {
               />
             </Grid>
             <Grid item xs={12} sm={6}>
+              
+            </Grid>
+          </Grid>
+          
+          <Grid item xs={12} sm={6}>
               <TextField
+                id="fullWidth"
                 type="date"
                 label="Last Donated"
                 variant="outlined"
@@ -433,12 +427,12 @@ const RegisterForm = (props) => {
                 fullWidth
                 value={lastDonatedDate}
                 onChange={(e) => setLastDonatedDate(e.target.value)}
-                required
+               
                 error={!!formErrors.lastDonatedDate}
                 helperText={formErrors.lastDonatedDate}
               />
             </Grid>
-          </Grid>
+          <Grid item xs={12} sm={6}>
           <Box display="flex" justifyContent="flex-end">
             <Button
               type="submit"
@@ -450,6 +444,7 @@ const RegisterForm = (props) => {
               Submit
             </Button>
           </Box>
+          </Grid>
         </form>
       </Container>
     </>

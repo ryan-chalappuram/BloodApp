@@ -3,7 +3,7 @@ import axios from "axios";
 import "./Profile.css";
 import ApiContext from '../ApiContext';
 import errorimg from "../Images/errorimg.png"
-
+import { Link } from 'react-router-dom';
 import Button from "@mui/material/Button";
 
 const Profile = (props) => {
@@ -35,9 +35,11 @@ const Profile = (props) => {
         const teledata = response.data;
         console.log(teledata);
         const verif = teledata.is_telegram_verified;
-        const verif_link = teledata.telegram_verification_link;
+        
+        const verif_link = `https://${teledata.telegram_verification_link}`
         setTelegramVerif(verif);
         setTelegramVerifLink(verif_link);
+        console.log(verif_link);
         
        
         // Process the retrieved data here
@@ -92,18 +94,21 @@ const Profile = (props) => {
 
 
   const renderTelegramVerificationLink = () => {
+
+    console.log(telegramveriflink)
+
     
       return (
         <div className="tele-verif-cont">
           <div className="tele-dets">
             <img src={errorimg} alt="Error" />
             <h4>Telegram not verified</h4>
-            <h4
+            <a href={telegramveriflink} target="_blank" rel="noopener noreferrer"><h4
               className="verify-link"
-              onClick={() => window.open(telegramveriflink, "_blank")}
+              // onClick={() => window.open(telegramveriflink, "_blank")}
             >
               Click Here
-            </h4>
+            </h4></a>
           </div>
         </div>
       );
@@ -129,7 +134,9 @@ const Profile = (props) => {
             </div>
           </div>
           <div className="edit-profile">
-            <button className="edit-button">Edit Profile</button>
+           <Link to= '/edit'>
+              <button className="edit-button">Edit Profile</button>
+            </Link>
           </div>
         </div>
       </div>

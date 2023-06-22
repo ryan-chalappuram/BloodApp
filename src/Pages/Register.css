@@ -1,5 +1,5 @@
 .header2{
-   
+  /* padding-bottom: 35px; */
 /* width:550px;  */
 /* margin-top:15px; */
 margin-left: -21.5px;
@@ -9,7 +9,7 @@ margin-left: -21.5px;
 width:534px;
 /* margin-right:40%; */
 /* width: auto;  */
-padding:1000px;
+/* padding:1000px; */
 
 
 height:94px;
@@ -19,8 +19,8 @@ transform-origin: right; /* Set the transform origin to the left side */
 /* justifyContent: center; */
 color: #FFFFFF;
 /* height:124px; */
-padding-top:15px;
-padding-bottom:450px;
+padding-top:25px;
+/* padding-bottom:450px; */
 
 max-width:100%;
 
@@ -53,10 +53,11 @@ max-width:100%;
 
 .reg_cont {
 
-  /* font-family: Poppins;
-  padding-bottom: 35px;
-  border-radius: 50px;
-  margin: auto;
+  /* padding-top:25px; */
+  font-family: Poppins;
+  padding-bottom: 27px;
+  border-radius: 25px;
+  /* margin: auto;
     text-align: center;
     flex-direction: column;
     align-items: center; */
@@ -65,7 +66,7 @@ max-width:100%;
   /* margin-left: 0; */
   /* text-align: left; */
   
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 117px 29px 0px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 9px 29px 0px;
 }
 
 .Grid .item{

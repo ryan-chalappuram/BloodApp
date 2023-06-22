@@ -43,7 +43,7 @@ function App() {
           <Route path="/login" element={<Login setShowBackground={setShowBackground}/>} />
             
           <Route path="/registernow" element={<Signup setShowBackground={setShowBackground}/> } />
-          
+          <Route path="/register" element={<Register setShowBackground={setShowBackground}/>} />
 
         
             <>
@@ -53,7 +53,7 @@ function App() {
           
          
           <Route path="/edit" element={<EditProfile setShowBackground={setShowBackground}/>} />
-          <Route path="/register" element={<Register setShowBackground={setShowBackground}/>} />
+          
           </>
           
         </Routes>
